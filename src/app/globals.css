@@ -1,4 +1,9 @@
 @import "tailwindcss";
 @plugin "daisyui" {
-  themes: black;
+  themes: luxury;
+}
+
+@theme {
+  --font-oswald: var(--font-oswald);
+  --font-inter: var(--font-inter);
 }
