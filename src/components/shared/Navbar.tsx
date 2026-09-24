@@ -19,7 +19,7 @@ const Navbar = () => {
           className={
             pathName === "/"
               ? "rounded-full bg-[#17220e] px-5 py-2 font-semibold text-[#C2F800]"
-              : "font-semibold font-inter text-white"
+              : "font-semibold font-inter text-white rounded-full px-5 py-2"
           }
         >
           Workouts
@@ -32,7 +32,7 @@ const Navbar = () => {
           className={
             pathName === "/my-plan"
               ? "rounded-full bg-[#17220e] px-5 py-2 font-semibold text-[#C2F800]"
-              : "font-semibold font-inter text-white"
+              : "font-semibold font-inter text-white rounded-full px-5 py-2"
           }
         >
           My Plan
@@ -73,7 +73,7 @@ const Navbar = () => {
           </ul>
         </div>
 
-        <div className="navbar-end gap-6">
+        <div className="navbar-end gap-4">
           <Link href="/plan">
             <PlanButton />
           </Link>
