@@ -7,3 +7,12 @@
   --font-oswald: var(--font-oswald);
   --font-inter: var(--font-inter);
 }
+
+.tabs.tabs-box .tab {
+  color: #fff !important;
+}
+
+.tabs.tabs-box .tab:checked {
+  background-color: #232732;
+  color: #fff;
+}
