@@ -42,7 +42,7 @@ const Navbar = () => {
   );
 
   return (
-    <nav className="border-b border-[#202328]">
+    <nav className="border-b border-[#202328] sticky top-0 bg-[#090A0D]">
       <div className="navbar container mx-auto">
         <div className="navbar-start">
           <div className="dropdown">
@@ -74,11 +74,11 @@ const Navbar = () => {
         </div>
 
         <div className="navbar-end gap-4">
-          <Link href="/plan">
+          <Link href="/my-plan">
             <PlanButton />
           </Link>
 
-          <Link href="/saved">
+          <Link href="/my-plan">
             <SavedButton />
           </Link>
         </div>

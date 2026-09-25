@@ -1,10 +1,19 @@
+"use client";
 import Image from "next/image";
 import bannerImg from "@/assets/banner.png";
+import { FiArrowRight } from "react-icons/fi";
 
 const Banner = () => {
+  const handleBrowseWorkouts = () => {
+    document.getElementById("fitlog-library")?.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+    });
+  };
+
   return (
     <section className="px-4 py-6 sm:px-6 lg:px-8">
-      <div className="mx-auto flex flex-col md:flex-row min-h-130 max-w-366.25 items-center overflow-hidden rounded-2xl border border-[#252932] bg-[#15171c]">
+      <div className="mx-auto flex flex-col md:flex-row min-h-130 container items-center overflow-hidden rounded-2xl border border-[#252932] bg-[#15171c]">
         {/* Content */}
         <div className="w-full px-7 py-14 sm:px-10 lg:w-[55%] lg:px-16">
           <p className="mb-7 text-sm font-bold tracking-wider text-[#ccff00]">
@@ -20,8 +29,12 @@ const Banner = () => {
             into todays plan, and watch the weeks work add up.
           </p>
 
-          <button className="btn mt-8 h-12 min-h-12 rounded-lg border-0 bg-[#ccff00] px-7 text-sm font-bold text-black hover:bg-[#b8eb00]">
+          <button
+            onClick={handleBrowseWorkouts}
+            className="btn mt-8 h-12 min-h-12 rounded-lg border-0 bg-[#ccff00] px-7 text-sm font-bold text-black hover:bg-[#b8eb00] flex items-center gap-2"
+          >
             BROWSE WORKOUTS
+            <FiArrowRight size={16} />
           </button>
         </div>
 
