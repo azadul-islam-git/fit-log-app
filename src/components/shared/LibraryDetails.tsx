@@ -1,6 +1,7 @@
 import Image from "next/image";
-import { FiBookmark, FiCalendar } from "react-icons/fi";
 import { IExercise } from "@/types/exercise.type";
+import AddPlanButton from "../button/AddPlanButton";
+import SaveLaterButton from "../button/SaveLaterButton";
 
 const LibraryDetails = ({ library }: { library: IExercise }) => {
   return (
@@ -134,15 +135,8 @@ const LibraryDetails = ({ library }: { library: IExercise }) => {
 
             {/* Buttons */}
             <div className="mt-6 flex flex-col gap-3 sm:flex-row">
-              <button className="btn h-9 min-h-9 border-none bg-lime-400 px-4 text-sm font-semibold text-black hover:bg-lime-300">
-                <FiCalendar className="h-3.5 w-3.5" />
-                Add to today&apos;s plan
-              </button>
-
-              <button className="btn btn-outline h-9 min-h-9 border-[#303640] px-4 text-sm font-normal text-gray-300 hover:border-[#303640] hover:bg-[#181b20]">
-                <FiBookmark className="h-3.5 w-3.5" />
-                Save for later
-              </button>
+              <AddPlanButton library={library} />
+              <SaveLaterButton library={library} />
             </div>
           </div>
         </div>

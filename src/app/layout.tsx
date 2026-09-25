@@ -4,6 +4,7 @@ import "./globals.css";
 import { Toaster } from "react-hot-toast";
 import Navbar from "@/components/homepage/Navbar";
 import Footer from "@/components/homepage/Footer";
+import FitlogContextProvider from "./contexts/FitlogContext";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -28,10 +29,12 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       className={`${inter.variable} ${oswald.variable} h-full antialiased`}
     >
       <body className="min-h-screen flex flex-col">
-        <Navbar />
-        <Toaster />
-        <main className="flex-1">{children}</main>
-        <Footer />
+        <FitlogContextProvider>
+          <Navbar />
+          <Toaster position="top-right" />
+          <main className="flex-1">{children}</main>
+          <Footer />
+        </FitlogContextProvider>
       </body>
     </html>
   );
