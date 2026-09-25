@@ -1,0 +1,152 @@
+import Image from "next/image";
+import { FiBookmark, FiCalendar } from "react-icons/fi";
+import { IExercise } from "@/types/exercise.type";
+
+const LibraryDetails = ({ library }: { library: IExercise }) => {
+  return (
+    <div className="min-h-screen bg-[#0d0f12] text-white" data-theme="dark">
+      <div className="mx-auto max-w-5xl px-5 py-8 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
+          {/* LEFT - IMAGE */}
+          <div className="relative w-full overflow-hidden rounded-xl">
+            <Image
+              src={library.image}
+              alt={library.name}
+              fill
+              sizes="(max-width: 768px) 100vw, 50vw"
+              className="object-cover"
+              priority
+            />
+          </div>
+
+          {/* RIGHT - DETAILS */}
+          <div className="flex flex-col">
+            {/* Title */}
+            <h1 className="text-2xl font-extrabold uppercase tracking-tight sm:text-3xl">
+              {library.name}
+            </h1>
+
+            {/* Description */}
+            <p className="mt-2 text-sm leading-relaxed text-gray-400">
+              {library.description}
+            </p>
+
+            {/* Muscle Groups */}
+            <div className="mt-4 flex flex-wrap gap-2">
+              {library.muscleGroups.map((muscle) => (
+                <span
+                  key={muscle}
+                  className="rounded-full bg-lime-400 px-3 py-1 text-[10px] font-bold text-black"
+                >
+                  {muscle}
+                </span>
+              ))}
+            </div>
+
+            {/* Stats */}
+            <div className="mt-5 overflow-hidden rounded-xl border border-[#252932] bg-[#15181e]">
+              {/* Equipment */}
+              <div className="flex items-center justify-between border-b border-[#252932] px-4 py-3">
+                <span className="text-[10px] font-bold uppercase tracking-wide text-gray-400">
+                  Equipment
+                </span>
+                <span className="text-xs text-gray-200">
+                  {library.equipment}
+                </span>
+              </div>
+
+              {/* Difficulty */}
+              <div className="flex items-center justify-between border-b border-[#252932] px-4 py-3">
+                <span className="text-[10px] font-bold uppercase tracking-wide text-gray-400">
+                  Difficulty
+                </span>
+                <span className="text-xs text-gray-200">
+                  {library.difficulty}
+                </span>
+              </div>
+
+              {/* Sets */}
+              <div className="flex items-center justify-between border-b border-[#252932] px-4 py-3">
+                <span className="text-[10px] font-bold uppercase tracking-wide text-gray-400">
+                  Sets
+                </span>
+                <span className="text-xs text-gray-200">{library.sets}</span>
+              </div>
+
+              {/* Reps */}
+              <div className="flex items-center justify-between border-b border-[#252932] px-4 py-3">
+                <span className="text-[10px] font-bold uppercase tracking-wide text-gray-400">
+                  Reps
+                </span>
+                <span className="text-xs text-gray-200">{library.reps}</span>
+              </div>
+
+              {/* Duration */}
+              <div className="flex items-center justify-between border-b border-[#252932] px-4 py-3">
+                <span className="text-[10px] font-bold uppercase tracking-wide text-gray-400">
+                  Duration
+                </span>
+                <span className="text-xs text-gray-200">
+                  {library.duration} min
+                </span>
+              </div>
+
+              {/* Calories */}
+              <div className="flex items-center justify-between border-b border-[#252932] px-4 py-3">
+                <span className="text-[10px] font-bold uppercase tracking-wide text-gray-400">
+                  Calories
+                </span>
+                <span className="text-xs text-gray-200">
+                  {library.caloriesBurned} kcal
+                </span>
+              </div>
+
+              {/* Rating */}
+              <div className="flex items-center justify-between px-4 py-3">
+                <span className="text-[10px] font-bold uppercase tracking-wide text-gray-400">
+                  Rating
+                </span>
+                <span className="text-xs text-gray-200">{library.rating}</span>
+              </div>
+            </div>
+
+            {/* Instructions */}
+            <div className="mt-6">
+              <h2 className="text-xs font-extrabold uppercase tracking-wide">
+                Instructions
+              </h2>
+
+              <ol className="mt-3 space-y-3">
+                {library.instructions.map((instruction, index) => (
+                  <li
+                    key={index}
+                    className="flex gap-3 text-[11px] leading-relaxed text-gray-400"
+                  >
+                    <span className="shrink-0 text-gray-500">{index + 1}.</span>
+
+                    <span>{instruction}</span>
+                  </li>
+                ))}
+              </ol>
+            </div>
+
+            {/* Buttons */}
+            <div className="mt-6 flex flex-col gap-3 sm:flex-row">
+              <button className="btn h-9 min-h-9 border-none bg-lime-400 px-4 text-xs font-semibold text-black hover:bg-lime-300">
+                <FiCalendar className="h-3.5 w-3.5" />
+                Add to today&apos;s plan
+              </button>
+
+              <button className="btn btn-outline h-9 min-h-9 border-[#303640] px-4 text-xs font-normal text-gray-300 hover:border-[#303640] hover:bg-[#181b20]">
+                <FiBookmark className="h-3.5 w-3.5" />
+                Save for later
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default LibraryDetails;

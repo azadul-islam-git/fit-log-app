@@ -17,14 +17,10 @@ const FitLibraryCard = ({ library }: { library: IExercise }) => {
 
   return (
     <div className="w-full overflow-hidden rounded-2xl border border-[#292c33] bg-[#15171c] text-white shadow-lg">
-      {/* Image */}
       <div className="relative h-48 w-full">
         <Image src={image} alt={name} fill className="object-cover" />
       </div>
-
-      {/* Content */}
       <div className="p-6">
-        {/* Categories */}
         <div className="mb-4 flex flex-wrap gap-2">
           {muscleGroups.map((muscle) => (
             <span
@@ -35,30 +31,20 @@ const FitLibraryCard = ({ library }: { library: IExercise }) => {
             </span>
           ))}
         </div>
-
-        {/* Title */}
-        <h2 className="font-heading text-lg font-extrabold uppercase tracking-wide">
+        <h2 className="font-heading text-lg font-extrabold uppercase tracking-wide font-oswald">
           {name}
         </h2>
-
-        {/* Equipment */}
         <p className="mt-1 text-sm text-gray-400">{equipment}</p>
-
-        {/* Divider */}
         <div className="my-4 border-t border-[#292c33]" />
-
-        {/* Stats */}
         <div className="flex items-center gap-5 text-sm text-gray-400">
           <div className="flex items-center gap-2">
             <FaRegClock className="text-gray-500" />
             <span>{duration}</span>
           </div>
-
           <div className="flex items-center gap-2">
             <TbFlameFilled className="text-gray-500 -scale-x-100" />
             <span>{caloriesBurned}</span>
           </div>
-
           <div className="flex items-center gap-2">
             <FaRegStar className="text-gray-500" />
             <span>{rating}</span>
