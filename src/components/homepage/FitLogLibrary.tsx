@@ -2,10 +2,18 @@ import React from "react";
 import FitLibraryCard from "../shared/FitLibraryCard";
 import { IExercise } from "@/types/exercise.type";
 
-const getLibraries = async () => {
+const getLibraries = async (): Promise<IExercise[]> => {
   try {
-    const res = await fetch("https://api.abcz.workers.dev/api/fitlog");
-    const data = await res.json();
+    const res = await fetch("https://api.abcz.workers.dev/api/fitlog", {
+      cache: "force-cache",
+    });
+
+    if (!res.ok) {
+      throw new Error(`API request failed: ${res.status}`);
+    }
+
+    const data: IExercise[] = await res.json();
+
     return data;
   } catch (error) {
     console.log(error, "error from fitlog library");
