@@ -85,9 +85,9 @@ const MyPlanPage = () => {
                 defaultValue="Pick a browser"
                 className="select outline-none! focus:outline-none!"
               >
-                <option>Chrome</option>
-                <option>FireFox</option>
-                <option>Safari</option>
+                <option>Duration</option>
+                <option>Calories</option>
+                <option>Rating</option>
               </select>
             </fieldset>
           </div>
