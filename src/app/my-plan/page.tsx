@@ -13,6 +13,29 @@ const MyPlanPage = () => {
   const { addPlan, setAddPlan, saveLater, setSaveLater } =
     useContext(FitlogContext);
   const [activeTab, setActiveTab] = useState<"plan" | "saved">("plan");
+  const [completedExercises, setCompletedExercises] = useState<number[]>([]);
+  const [sortBy, setSortBy] = useState("Duration");
+
+  const handleMarkAsDone = (id: number) => {
+    setCompletedExercises([...completedExercises, id]);
+    toast.success("Workout marked as done!");
+  };
+
+  const sortedExercises = [...addPlan].sort((a, b) => {
+    if (sortBy === "Duration") {
+      return a.duration - b.duration;
+    }
+
+    if (sortBy === "Calories") {
+      return a.caloriesBurned - b.caloriesBurned;
+    }
+
+    if (sortBy === "Rating") {
+      return b.rating - a.rating;
+    }
+
+    return 0;
+  });
 
   return (
     <div className="min-h-fit bg-base-100 text-base-content">
@@ -82,12 +105,13 @@ const MyPlanPage = () => {
             <fieldset className="fieldset flex flex-row items-center gap-2">
               <span className="text-white whitespace-nowrap">Sort By</span>
               <select
-                defaultValue="Pick a browser"
+                value={sortBy}
+                onChange={(e) => setSortBy(e.target.value)}
                 className="select outline-none! focus:outline-none!"
               >
-                <option>Duration</option>
-                <option>Calories</option>
-                <option>Rating</option>
+                <option value="Duration">Duration</option>
+                <option value="Calories">Calories</option>
+                <option value="Rating">Rating</option>
               </select>
             </fieldset>
           </div>
@@ -97,7 +121,7 @@ const MyPlanPage = () => {
           <>
             {addPlan.length > 0 ? (
               <div className="mt-4 space-y-3">
-                {addPlan.map((exercise) => (
+                {sortedExercises.map((exercise) => (
                   <div
                     key={exercise.id}
                     className="flex items-center justify-between gap-4 rounded-2xl bg-[#111317] p-3 sm:p-4"
@@ -150,9 +174,20 @@ const MyPlanPage = () => {
                         View Details
                       </Link>
 
-                      <button className="flex items-center gap-1.5 rounded-full bg-lime-400 px-3 py-2 text-xs font-semibold text-black whitespace-nowrap sm:px-4 sm:text-sm cursor-pointer">
+                      <button
+                        onClick={() => handleMarkAsDone(exercise.id)}
+                        disabled={completedExercises.includes(exercise.id)}
+                        className={`flex items-center gap-1.5 whitespace-nowrap rounded-full px-3 py-2 text-xs font-semibold sm:px-4 sm:text-sm ${
+                          completedExercises.includes(exercise.id)
+                            ? "cursor-default bg-gray-600 text-gray-300"
+                            : "cursor-pointer bg-lime-400 text-black"
+                        }`}
+                      >
                         <FaCheck className="h-3.5 w-3.5" />
-                        Mark as Done
+
+                        {completedExercises.includes(exercise.id)
+                          ? "Completed"
+                          : "Mark as Done"}
                       </button>
 
                       <button
