@@ -20,7 +20,13 @@ const FitLibraryCard = ({ library }: { library: IExercise }) => {
     <Link href={`/fitlog/${library.id}`}>
       <div className="w-full overflow-hidden rounded-2xl border border-[#292c33] bg-[#15171c] text-white shadow-lg transition-all duration-300 hover:-translate-y-1">
         <div className="relative h-48 w-full">
-          <Image src={image} alt={name} fill className="object-cover" />
+          <Image
+            src={image}
+            alt={name}
+            fill
+            className="object-cover"
+            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+          />
         </div>
         <div className="p-6">
           <div className="mb-4 flex flex-wrap gap-2">

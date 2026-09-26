@@ -13,6 +13,7 @@ const MyPlanPage = () => {
   const { addPlan, setAddPlan, saveLater, setSaveLater } =
     useContext(FitlogContext);
   const [activeTab, setActiveTab] = useState<"plan" | "saved">("plan");
+  const currentExercises = activeTab === "plan" ? addPlan : saveLater;
   const [completedExercises, setCompletedExercises] = useState<number[]>([]);
   const [sortBy, setSortBy] = useState("Duration");
 
@@ -21,21 +22,26 @@ const MyPlanPage = () => {
     toast.success("Workout marked as done!");
   };
 
-  const sortedExercises = [...addPlan].sort((a, b) => {
-    if (sortBy === "Duration") {
-      return a.duration - b.duration;
-    }
+  const sortExercises = (exercises: typeof addPlan) => {
+    return [...exercises].sort((a, b) => {
+      if (sortBy === "Duration") {
+        return a.duration - b.duration;
+      }
 
-    if (sortBy === "Calories") {
-      return a.caloriesBurned - b.caloriesBurned;
-    }
+      if (sortBy === "Calories") {
+        return a.caloriesBurned - b.caloriesBurned;
+      }
 
-    if (sortBy === "Rating") {
-      return b.rating - a.rating;
-    }
+      if (sortBy === "Rating") {
+        return b.rating - a.rating;
+      }
 
-    return 0;
-  });
+      return 0;
+    });
+  };
+
+  const sortedExercises = sortExercises(addPlan);
+  const sortedSavedExercises = sortExercises(saveLater);
 
   return (
     <div className="min-h-fit bg-base-100 text-base-content">
@@ -53,7 +59,7 @@ const MyPlanPage = () => {
           <div className="flex-1 px-4 py-4 sm:px-8 sm:py-6">
             <p className="text-xs text-[#8A92A0] sm:text-sm">Exercises</p>
             <p className="mt-1 text-xl font-bold text-lime-400 sm:text-2xl">
-              {addPlan.length}
+              {currentExercises.length}
             </p>
           </div>
 
@@ -62,7 +68,7 @@ const MyPlanPage = () => {
           <div className="flex-1 px-4 py-4 sm:px-8 sm:py-6">
             <p className="text-xs text-[#8A92A0] sm:text-sm">Minutes</p>
             <p className="mt-1 text-xl font-bold text-white sm:text-2xl">
-              {addPlan.reduce(
+              {currentExercises.reduce(
                 (total, exercise) => total + exercise.duration,
                 0,
               )}
@@ -74,7 +80,7 @@ const MyPlanPage = () => {
           <div className="flex-1 px-4 py-4 sm:px-8 sm:py-6">
             <p className="text-xs text-[#8A92A0] sm:text-sm">Calories</p>
             <p className="mt-1 text-xl font-bold text-white sm:text-2xl">
-              {addPlan.reduce(
+              {currentExercises.reduce(
                 (total, exercise) => total + exercise.caloriesBurned,
                 0,
               )}
@@ -234,7 +240,7 @@ const MyPlanPage = () => {
           <>
             {saveLater.length > 0 ? (
               <div className="mt-4 space-y-3">
-                {saveLater.map((exercise) => (
+                {sortedSavedExercises.map((exercise) => (
                   <div
                     key={exercise.id}
                     className="flex items-center justify-between gap-4 rounded-2xl bg-[#111317] p-3 sm:p-4"
